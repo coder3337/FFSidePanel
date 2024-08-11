@@ -30,11 +30,11 @@ window.addEventListener("mouseout", () => {
   contentBox.setAttribute("contenteditable", false);
   browser.tabs.query({ windowId: myWindowId, active: true }).then((tabs) => {
     let contentToStore = {};
+    contentToStore[tabs[0].title] = contentBox.textContent;
     contentToStore[tabs[0].url] = contentBox.textContent;
     browser.storage.local.set(contentToStore);
   });
 });
-
 /*
 Update the sidebar's content.
 
@@ -73,21 +73,26 @@ and update its content.
 }); */
 
 function logTabs(tabs) {
+  //console.log(tabs[0]);
   const title = tabs[0].title;
   const url = tabs[0].url;
+  const tabIconUrl = tabs[0].favIconUrl;
+
+
   const btn = document.querySelector("#addTabButton");
   btn.addEventListener("click", clicked);
 
   function clicked() {
     const ul = document.querySelector(".tabsList");
     const li = document.createElement("li");
-    li.innerHTML = `<span class="close">x</span><span class="title">${title}</span> <br> ${url}`;
+    li.innerHTML = `<a href="https://${url}"><span class="activeTabIcon"><img src="${tabIconUrl}"></span><span class="close">x</span></a>
+<span class="title"><a href="https://${title}">${title}</a></span> <br> <span class="url"><a href="https://${url}">${url}</a></span>`;
     ul.appendChild(li);
 
     // Add event listener to the close button after it's added to the DOM
     const closeBtn = li.querySelector(".close");
     closeBtn.addEventListener("click", function () {
-      this.parentNode.remove(); // This will remove the li element
+      this.parentNode.parentNode.remove(); // This will remove the li element
     });
   }
 }
@@ -119,10 +124,10 @@ function onError(error) {
 browser.tabs
   .query({ currentWindow: true, active: true })
   .then(logTabs, onError);
-
+  
 // sidebar.js
 
-/* browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
+browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
   myWindowId = windowInfo.id;
   console.log(myWindowId);
-}); */
+});

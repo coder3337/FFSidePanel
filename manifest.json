@@ -3,14 +3,20 @@
   "name": "Sidebar Tabs 'Reading' Panel",
   "description": "Show a sidebar of 'current reading' tabs. ",
   "version": "1.0",
+  "icons": {
+    "48": "icons/star-48.png"
+  },
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "54.0a1"
+      "strict_min_version": "54.0a1",
+      "update_url": "https://test/sidepanelExt/updates.json"
     }
   },
   "sidebar_action": {
-    "default_icon": "icons/star.png",
-    "default_title": "Reading' Panel",
+    "default_icon": {
+      "32": "icons/star-32.png"
+    },
+    "default_title": "Sidebar Tabs 'Reading' Panel",
     "default_panel": "sidebar/panel.html"
   },
   "permissions": [

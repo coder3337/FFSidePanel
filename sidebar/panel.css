@@ -13,24 +13,35 @@ body {
   font: caption;
   background-color: #09181fec;
 }
+a:hover, a:focus {cursor: pointer;}
 
 p {
   margin: 1em 2em;
 }
 
+.container {
+  background-color: #0e3547be;
+  border-radius: 20px;
+  border: solid #0e3547 1px;
+  margin: 10px;
+  min-height: 100%;
+}
+
 #content {
   width: 90%;
-  height: 30%;
-  margin: 0 5% 5%;
+  height: 20%;
+  margin: 20px 5%;
   padding: 10px;
-  border: .5em solid #0e3547da;
+  border: .5em solid #0e3547;
+  border-radius: 20px;
   transition: background-color .2s ease-out;
   /*   position: absolute;
   bottom: 1%; */
 }
 
+
 #content[contenteditable=true] {
-  background-color: #153949da;
+  background-color: #09222e;
   transition: background-color .2s ease-in;
   color: white;
 }
@@ -39,54 +50,40 @@ p {
   outline: 0px solid transparent;
 }
 
-
-#addTabButton {
-  background-color: chartreuse;
-  color: black;
-  font-weight: bold;
-  border-radius: 15px;
-  padding: 10px;
-  font-size: 18px;
-  width: 150px;
-  text-align: center;
-  border: solid #ccc 0px;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-}
-
-ul.tabsList {
-  list-style-type: none;
-  color: azure;
-  margin: 0;
-  padding: 0;
-}
-
-ul.tabsList li {
-  padding: 20px;
-  color: azure;
-  font-size: 14px;
-  border: solid #ccc 1px;
-  border-radius: 10px;
-  margin: 10px 10px;
-}
-
-.newEntry {}
-
 .title {
-  font-size: 18px !important;
+  font-size: 14px !important;
   font-weight: bold;
-
+  margin-left: 10px;
 }
 
-.url {}
+.title a {
+  color: #5bf00577;
+  text-decoration: none;
+}
+
+.title a:hover {
+  color: #5bf005;
+}
+
+.url {
+  margin-left: 10px;
+}
+
+.url a:link {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+.url a:hover {
+  color: #ccc;
+}
 
 .close {
   float: right;
   padding: 5px 10px;
-  background: #002702;
+  background: #00270263;
   border-radius: 5px;
-  font-size: 18px !important;
+  font-size: 14px !important;
   font-weight: bold;
   color: #5bf005;
 }
@@ -97,3 +94,47 @@ ul.tabsList li {
   background: #002702;
   color: #ffffff;
 }
+
+.activeTabIcon {
+  padding: 5px;
+  background-color: #09222e;
+  border-radius: 5px;
+  float: left;
+}
+
+#addTabButton {
+  background-color: #5bf00577;
+  color: #ccc;
+  font-weight: bold;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 14px;
+  width: 150px;
+  text-align: center;
+  border: solid #ccc 0px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  transition: background-color .2s ease-out;
+}
+#addTabButton:hover {
+    cursor: pointer;
+  background-color: chartreuse;
+  color: black;
+}
+
+ul.tabsList {
+  list-style-type: none;
+  margin: 30px 0 0 0;
+  padding: 0;
+}
+
+ul.tabsList li {
+  font-size: 14px;
+  border-radius: 0px;
+  margin: 10px 40px;
+  padding: 0 0 10px 0;
+  border-bottom: solid #cccccc2c 1px;
+}
+
+.newEntry {}
