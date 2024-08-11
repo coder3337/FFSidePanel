@@ -1,0 +1,99 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  color: rgb(209, 209, 209);
+  font-size: 14px !important;
+}
+
+body {
+  height: 90%;
+  font: caption;
+  background-color: #09181fec;
+}
+
+p {
+  margin: 1em 2em;
+}
+
+#content {
+  width: 90%;
+  height: 30%;
+  margin: 0 5% 5%;
+  padding: 10px;
+  border: .5em solid #0e3547da;
+  transition: background-color .2s ease-out;
+  /*   position: absolute;
+  bottom: 1%; */
+}
+
+#content[contenteditable=true] {
+  background-color: #153949da;
+  transition: background-color .2s ease-in;
+  color: white;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+
+#addTabButton {
+  background-color: chartreuse;
+  color: black;
+  font-weight: bold;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 18px;
+  width: 150px;
+  text-align: center;
+  border: solid #ccc 0px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+ul.tabsList {
+  list-style-type: none;
+  color: azure;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tabsList li {
+  padding: 20px;
+  color: azure;
+  font-size: 14px;
+  border: solid #ccc 1px;
+  border-radius: 10px;
+  margin: 10px 10px;
+}
+
+.newEntry {}
+
+.title {
+  font-size: 18px !important;
+  font-weight: bold;
+
+}
+
+.url {}
+
+.close {
+  float: right;
+  padding: 5px 10px;
+  background: #002702;
+  border-radius: 5px;
+  font-size: 18px !important;
+  font-weight: bold;
+  color: #5bf005;
+}
+
+.close:hover {
+  cursor: pointer;
+  display: inline-block;
+  background: #002702;
+  color: #ffffff;
+}

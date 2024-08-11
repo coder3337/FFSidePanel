@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Sidebar Tabs 'Reading' Panel",
+  "description": "Show a sidebar of 'current reading' tabs. ",
+  "version": "1.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "54.0a1"
+    }
+  },
+  "sidebar_action": {
+    "default_icon": "icons/star.png",
+    "default_title": "Reading' Panel",
+    "default_panel": "sidebar/panel.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs"
+  ],
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
+  }
+}
