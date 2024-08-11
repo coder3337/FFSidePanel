@@ -89,6 +89,24 @@ function logTabs(tabs) {
   const btn = document.querySelector("#addTabButton");
   btn.addEventListener("click", clicked);
 
+  const resetBtn = document.querySelector(".resetButton");
+  resetBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const li = document.getElementsByClassName("tab");
+    // console.log(li);
+    while (li.length > 0) {
+      // New JS remove Function
+      li[0].remove();
+      // Safer cross browser
+      // Has to traverse by going up to the parent and removing the child
+      // Which is itself, the li element.
+      li[0].parentNode.removeChild(li[0]);
+    }
+    // tab.remove();
+    //this.parentNode.remove(); // This will remove the li element
+  });
+
   function clicked() {
     const ul = document.querySelector(".tabsList");
     const li = document.createElement("li");
@@ -100,8 +118,10 @@ function logTabs(tabs) {
     const img = document.createElement("img");
 
     ul.appendChild(li);
+    li.className = "tab";
+
     li.appendChild(imgLink);
-    imgLink.appendChild(img); 
+    imgLink.appendChild(img);
 
     li.appendChild(closeBtn);
     li.appendChild(titleSpan);
@@ -109,6 +129,7 @@ function logTabs(tabs) {
     //url = str.substring(0, 10);
     /*   urlSpan.className = "url";
     urlSpan.textContent = url; */
+
     titleSpan.className = "title";
     titleSpan.href = url;
     titleSpan.textContent = title;
@@ -126,7 +147,7 @@ function logTabs(tabs) {
     closeBtn.className = "close";
     closeBtn.textContent = "x";
 
- /*    tabIcon.className = "tabIcon";
+    /*    tabIcon.className = "tabIcon";
     tabIcon.href = url;
     tabIcon.src = faviconUrl; */
 

@@ -120,19 +120,24 @@ a.url:hover {
   width: 30px;
 }
 
+div.buttons {
+  position: relative;
+  bottom: 0px;
+  left: 20px;
+}
+
 #addTabButton {
   background-color: #5bf00577;
   color: #ccc;
   font-weight: bold;
   border-radius: 15px;
   padding: 10px;
+  margin-right: 20px;
   font-size: 14px;
   width: 150px;
   text-align: center;
   border: solid #ccc 0px;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+  float: left;
   transition: background-color .2s ease-out;
 }
 
@@ -141,6 +146,8 @@ a.url:hover {
   background-color: chartreuse;
   color: black;
 }
+
+a.resetLink {}
 
 ul.tabsList {
   list-style-type: none;
