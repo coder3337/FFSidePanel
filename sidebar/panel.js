@@ -28,12 +28,13 @@ When the user mouses out, save the current contents of the box.
 */
 window.addEventListener("mouseout", () => {
   contentBox.setAttribute("contenteditable", false);
+  // Save the current contents of the box to local storage.
   browser.tabs.query({ windowId: myWindowId, active: true }).then((tabs) => {
-    let contentToStore = {};
-    contentToStore[tabs[0].title] = contentBox.textContent;
-    contentToStore[tabs[0].url] = contentBox.textContent;
-    contentToStore[tabs[0].activeTabIcon] = contentBox.textContent;
-    browser.storage.local.set(contentToStore);
+    //console.log({ windowId: myWindowId, active: true });
+    let textBox = document.getElementById("content").value;
+    console.log(textBox);
+    /*     contentBox.textContent;
+     */ localStorage.setItem("Text box", textBox);
   });
 });
 /*
@@ -43,7 +44,7 @@ Update the sidebar's content.
 2) Get its stored content.
 3) Put it in the content box.
 */
-function updateContent() {
+/* function updateContent() {
   browser.tabs
     .query({ windowId: myWindowId, active: true })
     .then((tabs) => {
@@ -52,7 +53,7 @@ function updateContent() {
     .then((storedInfo) => {
       contentBox.textContent = storedInfo[Object.keys(storedInfo)[0]];
     });
-}
+} */
 
 /*
 Update content when a new tab becomes active.
@@ -75,39 +76,17 @@ and update its content.
 
 function logTabs(tabs) {
   //console.log(tabs[0]);
-
+  let id = tabs[0].id;
   let host = tabs[0].url;
   let domain = new URL(host).hostname.replace("www.", "");
-
   let title = tabs[0].title;
-
   let url = tabs[0].url;
-  /* url = url.substr(8); */
-
-  const faviconUrl = tabs[0].favIconUrl;
+  let faviconUrl = tabs[0].favIconUrl;
 
   const btn = document.querySelector("#addTabButton");
-  btn.addEventListener("click", clicked);
+  btn.addEventListener("click", addItem);
 
-  const resetBtn = document.querySelector(".resetButton");
-  resetBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const li = document.getElementsByClassName("tab");
-    // console.log(li);
-    while (li.length > 0) {
-      // New JS remove Function
-      li[0].remove();
-      // Safer cross browser
-      // Has to traverse by going up to the parent and removing the child
-      // Which is itself, the li element.
-      li[0].parentNode.removeChild(li[0]);
-    }
-    // tab.remove();
-    //this.parentNode.remove(); // This will remove the li element
-  });
-
-  function clicked() {
+  function addItem() {
     const ul = document.querySelector(".tabsList");
     const li = document.createElement("li");
     const titleSpan = document.createElement("a");
@@ -147,41 +126,50 @@ function logTabs(tabs) {
     closeBtn.className = "close";
     closeBtn.textContent = "x";
 
-    /*    tabIcon.className = "tabIcon";
-    tabIcon.href = url;
-    tabIcon.src = faviconUrl; */
+    // save to local storage
+    let timestamp = new Date().toLocaleString();
+    let uniqueId = id++;
+    /*  source.forEach((item, i) => {
+      item.id = i + 1;
+    }); */
+    const tabGroup = [];
+    tabGroup.push(uniqueId);
+    tabGroup.push(timestamp);
+    tabGroup.push(id);
+    tabGroup.push(title);
+    tabGroup.push(url);
+    tabGroup.push(faviconUrl);
 
-    /*     tabIcon.innerHTML = "<img src='" + faviconUrl + "'> "; */
-
-    /* li.innerHTML = `<a href="${url}"><span class="activeTabIcon"><img src="${tabIcon}"></span></a><span class="close">x</span>
-<span class="title"><a href="${title}">${title}</a></span> <br> <span class="url"><a href="${url}">${url}</a></span>`; */
+    localStorage.setItem(uniqueId, tabGroup);
 
     // Add event listener to the close button after it's added to the DOM
-
     closeBtn.addEventListener("click", function (e) {
       e.preventDefault();
       this.parentNode.remove(); // This will remove the li element
+      localStorage.removeItem(uniqueId);
+    });
+
+    // remove all bookmark items from sidebar
+    const resetBtn = document.querySelector(".resetButton");
+    resetBtn.addEventListener("click", function () {
+      // clear the local storage
+      localStorage.clear();
+
+      const li = document.getElementsByClassName("tab");
+      // console.log(li);
+      while (li.length > 0) {
+        // New JS remove Function
+        li[0].remove();
+        // Safer cross browser
+        // Has to traverse by going up to the parent and removing the child
+        // Which is itself, the li element.
+        li[0].parentNode.removeChild(li[0]);
+      }
+      // tab.remove();
+      //this.parentNode.remove(); // This will remove the li element
     });
   }
 }
-
-//let id = tabs[0].id;
-// link each tab to each panel
-
-//console.log(title);
-/*   browser.tabs.create({ url: "https://www.example.com" }); */
-//console.log("window" + myWindowId);
-
-// tabs[0].url requires the `tabs` permission or a matching host permission.
-
-/*   console.log(tabs[0].title);
-  console.log(tabs[0].url); */
-/*   let id = tabs[0].id;
-  let title = tabs[0].title; */
-// let url = tabs[0].url;
-/*   console.log(id);
-  console.log(title); */
-// console.log(title + " || " + url);
 
 function onError(error) {
   console.error(`Error: ${error}`);
@@ -191,9 +179,7 @@ browser.tabs
   .query({ currentWindow: true, active: true })
   .then(logTabs, onError);
 
-// sidebar.js
-
 browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
   myWindowId = windowInfo.id;
-  console.log(myWindowId);
+  //console.log(myWindowId);
 });

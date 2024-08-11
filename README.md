@@ -1,23 +1,29 @@
-# annotate-page
+# A readying panel with scratchpad
 
-## What it does
+### What it does
 
-This example adds a sidebar that lets you take notes on the current web page. The notes are saved to local storage, and the notes for each page are shown again when you open that page again.
+A simple reading pane to save tabs you want to come back to. Saves to local storage and has a scratchpad. 
 
-The example also uses the `commands` manifest key to add a keyboard shortcut that opens the sidebar.
+My spin on the *annotate-page* and *quicknote* examples from webextensions-examples. 
 
-## What it shows
 
-How to create a sidebar for an add-on. How to associate the sidebar with the currently active tab in that sidebar's window. How to store and restore sidebar content.
-https://github.com/mdn/webextensions-examples/tree/main/annotate-page
-https://github.com/mdn/webextensions-examples/tree/main/quicknote
+### Environment
 
-https://extensionworkshop.com/documentation/develop/debugging/#developer-tools-toolbox
+In order to debug extensions you must make use of the built in 'Developer tools toolbox' found in about:debugging#/runtime/this-firefox. Load your temporary extensions manifest and click inspect. You will need the web-ext extension.
 
+```
 npm install --global web-ext
-
-run with 
 
 web-ext run
 
 web-ext lint
+
+```
+### Resources and references
+With thanks:
+- https://extensionworkshop.com
+- https://extensionworkshop.com/documentation/develop/debugging/#developer-tools-toolbox
+- https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/
+- https://github.com/mdn/webextensions-examples/tree/main/annotate-page
+- https://github.com/mdn/webextensions-examples/tree/main/quicknote
+
