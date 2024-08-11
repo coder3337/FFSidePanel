@@ -32,6 +32,7 @@ window.addEventListener("mouseout", () => {
     let contentToStore = {};
     contentToStore[tabs[0].title] = contentBox.textContent;
     contentToStore[tabs[0].url] = contentBox.textContent;
+    contentToStore[tabs[0].activeTabIcon] = contentBox.textContent;
     browser.storage.local.set(contentToStore);
   });
 });
@@ -74,10 +75,16 @@ and update its content.
 
 function logTabs(tabs) {
   //console.log(tabs[0]);
-  const title = tabs[0].title;
-  const url = tabs[0].url;
-  const tabIconUrl = tabs[0].favIconUrl;
 
+  let host = tabs[0].url;
+  let domain = new URL(host).hostname.replace("www.", "");
+
+  let title = tabs[0].title;
+
+  let url = tabs[0].url;
+  /* url = url.substr(8); */
+
+  const faviconUrl = tabs[0].favIconUrl;
 
   const btn = document.querySelector("#addTabButton");
   btn.addEventListener("click", clicked);
@@ -85,18 +92,57 @@ function logTabs(tabs) {
   function clicked() {
     const ul = document.querySelector(".tabsList");
     const li = document.createElement("li");
-    li.innerHTML = `<a href="https://${url}"><span class="activeTabIcon"><img src="${tabIconUrl}"></span><span class="close">x</span></a>
-<span class="title"><a href="https://${title}">${title}</a></span> <br> <span class="url"><a href="https://${url}">${url}</a></span>`;
+    const titleSpan = document.createElement("a");
+    const hostnameSpan = document.createElement("a");
+    const closeBtn = document.createElement("span");
+
+    const imgLink = document.createElement("a");
+    const img = document.createElement("img");
+
     ul.appendChild(li);
+    li.appendChild(imgLink);
+    imgLink.appendChild(img); 
+
+    li.appendChild(closeBtn);
+    li.appendChild(titleSpan);
+    li.appendChild(hostnameSpan);
+    //url = str.substring(0, 10);
+    /*   urlSpan.className = "url";
+    urlSpan.textContent = url; */
+    titleSpan.className = "title";
+    titleSpan.href = url;
+    titleSpan.textContent = title;
+
+    hostnameSpan.className = "url";
+    hostnameSpan.href = url;
+    hostnameSpan.textContent = domain;
+
+    imgLink.href = url;
+
+    img.className = "tabIcon";
+    img.href = url;
+    img.src = faviconUrl;
+
+    closeBtn.className = "close";
+    closeBtn.textContent = "x";
+
+ /*    tabIcon.className = "tabIcon";
+    tabIcon.href = url;
+    tabIcon.src = faviconUrl; */
+
+    /*     tabIcon.innerHTML = "<img src='" + faviconUrl + "'> "; */
+
+    /* li.innerHTML = `<a href="${url}"><span class="activeTabIcon"><img src="${tabIcon}"></span></a><span class="close">x</span>
+<span class="title"><a href="${title}">${title}</a></span> <br> <span class="url"><a href="${url}">${url}</a></span>`; */
 
     // Add event listener to the close button after it's added to the DOM
-    const closeBtn = li.querySelector(".close");
-    closeBtn.addEventListener("click", function () {
-      this.parentNode.parentNode.remove(); // This will remove the li element
+
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      this.parentNode.remove(); // This will remove the li element
     });
   }
 }
-
 
 //let id = tabs[0].id;
 // link each tab to each panel
@@ -116,7 +162,6 @@ function logTabs(tabs) {
   console.log(title); */
 // console.log(title + " || " + url);
 
-
 function onError(error) {
   console.error(`Error: ${error}`);
 }
@@ -124,7 +169,7 @@ function onError(error) {
 browser.tabs
   .query({ currentWindow: true, active: true })
   .then(logTabs, onError);
-  
+
 // sidebar.js
 
 browser.windows.getCurrent({ populate: true }).then((windowInfo) => {

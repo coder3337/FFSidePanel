@@ -13,10 +13,18 @@ body {
   font: caption;
   background-color: #09181fec;
 }
-a:hover, a:focus {cursor: pointer;}
+
+a:hover,
+a:focus {
+  cursor: pointer;
+}
 
 p {
   margin: 1em 2em;
+}
+
+textarea {
+  vertical-align: top;
 }
 
 .container {
@@ -35,46 +43,52 @@ p {
   border: .5em solid #0e3547;
   border-radius: 20px;
   transition: background-color .2s ease-out;
-  /*   position: absolute;
-  bottom: 1%; */
+
 }
 
+#content[contenteditable=false] {
+  background-color: #09222e;
+
+}
 
 #content[contenteditable=true] {
-  background-color: #09222e;
+  background-color: #09222e83;
   transition: background-color .2s ease-in;
   color: white;
 }
 
-[contenteditable]:focus {
+#content[contenteditable]:focus {
   outline: 0px solid transparent;
+  background-color: #09222e;
+
 }
 
-.title {
+a.title {
   font-size: 14px !important;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.title a {
+a.title {
   color: #5bf00577;
   text-decoration: none;
 }
 
-.title a:hover {
+a.title:hover {
   color: #5bf005;
 }
 
-.url {
+a.url {
   margin-left: 10px;
+  float: left;
 }
 
-.url a:link {
+a.url {
   color: #a0a0a0;
   text-decoration: none;
 }
 
-.url a:hover {
+a.url:hover {
   color: #ccc;
 }
 
@@ -95,11 +109,15 @@ p {
   color: #ffffff;
 }
 
-.activeTabIcon {
+.tabIcon {
   padding: 5px;
   background-color: #09222e;
   border-radius: 5px;
   float: left;
+}
+
+.tabIcon {
+  width: 30px;
 }
 
 #addTabButton {
@@ -117,24 +135,26 @@ p {
   left: 20px;
   transition: background-color .2s ease-out;
 }
+
 #addTabButton:hover {
-    cursor: pointer;
+  cursor: pointer;
   background-color: chartreuse;
   color: black;
 }
 
 ul.tabsList {
   list-style-type: none;
-  margin: 30px 0 0 0;
+  margin: 0px 0 0 0;
   padding: 0;
 }
 
 ul.tabsList li {
   font-size: 14px;
   border-radius: 0px;
-  margin: 10px 40px;
+  margin: 0px 40px 10px 40px;
   padding: 0 0 10px 0;
   border-bottom: solid #cccccc2c 1px;
+  float: left;
 }
 
 .newEntry {}
