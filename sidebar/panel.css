@@ -43,11 +43,14 @@ textarea {
   border: .5em solid #0e3547;
   border-radius: 20px;
   transition: background-color .2s ease-out;
+  font-family: monospace !important;
+  font-size: 14px;
 
 }
 
 #content[contenteditable=false] {
   background-color: #09222e;
+    color: white;
 
 }
 
