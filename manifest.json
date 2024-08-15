@@ -9,7 +9,8 @@
   "browser_specific_settings": {
     "gecko": {
       "strict_min_version": "54.0a1",
-      "update_url": "https://test/sidepanelExt/updates.json"
+      "update_url": "https://coder3337.github.io/FFSidePanelUpdates/sidebar.zip",
+      "id": "bd494a8103cc346252e944bc43efc4ec59cc4afe@temporary-addon"
     }
   },
   "sidebar_action": {

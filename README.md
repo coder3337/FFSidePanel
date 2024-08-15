@@ -18,6 +18,10 @@ web-ext run
 web-ext lint
 
 ```
+web-ext run --firefox-profile 
+or
+web-ext run --firefox="C:\Program Files\Firefox Developer Edition\firefox.exe"
+
 ### Resources and references
 With thanks:
 - https://extensionworkshop.com
