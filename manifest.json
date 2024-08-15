@@ -8,7 +8,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "54.0a1",
+      "strict_min_version": "58.0",
       "update_url": "https://github.com/coder3337/FFSidePanel/blob/master/sidepanel.zip",
       "id": "bd494a8103cc346252e944bc43efc4ec59cc4afe@temporary-addon"
     }
