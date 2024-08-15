@@ -33,12 +33,13 @@ textarea {
   border: solid #0e3547 1px;
   margin: 10px;
   min-height: 100%;
+  padding: 20px 5%;
 }
 
 #content {
-  width: 90%;
+  width: 100%;
   height: 20%;
-  margin: 20px 5%;
+  margin: 20px 0 0 0;
   padding: 10px;
   border: .5em solid #0e3547;
   border-radius: 20px;
@@ -50,7 +51,7 @@ textarea {
 
 #content[contenteditable=false] {
   background-color: #09222e;
-    color: white;
+  color: white;
 
 }
 
@@ -64,6 +65,44 @@ textarea {
   outline: 0px solid transparent;
   background-color: #09222e;
 
+}
+
+div.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* @keyframes fadeIn {
+  0% {
+    opacity: 1;
+    display: none;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 0;
+    display: none;
+  }
+} */
+
+a.sendToLink {
+  text-decoration: underline;
+  margin: 0 auto;
+  float: right;
+  width: 200px;
+}
+
+input {
+  border-radius: 10px;
+  padding: 10px
+}
+
+input:invalid {
+  border: 3px solid red;
+}
+
+input:valid {
+  border: 3px solid green;
 }
 
 a.title {
@@ -129,7 +168,8 @@ div.buttons {
   left: 20px;
 }
 
-#addTabButton {
+#addTabButton,
+.sendButton {
   background-color: #5bf00577;
   color: #ccc;
   font-weight: bold;
@@ -144,7 +184,13 @@ div.buttons {
   transition: background-color .2s ease-out;
 }
 
-#addTabButton:hover {
+.sendButton {
+  width: auto;
+  float: right;
+}
+
+#addTabButton:hover,
+.sendButton:hover {
   cursor: pointer;
   background-color: chartreuse;
   color: black;
@@ -161,7 +207,7 @@ ul.tabsList {
 ul.tabsList li {
   font-size: 14px;
   border-radius: 0px;
-  margin: 0px 40px 10px 40px;
+  margin: 20px 10px 10px 10px;
   padding: 0 0 10px 0;
   border-bottom: solid #cccccc2c 1px;
   float: left;
