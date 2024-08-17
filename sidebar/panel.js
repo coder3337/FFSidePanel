@@ -1,6 +1,6 @@
 let myWindowId;
 const contentBox = document.getElementById("content");
-contentBox.placeholder = "Subject goes here..\n\nBody content here..";
+contentBox.placeholder = "Subject goes here...\n\nBody content here...";
 
 browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
   myWindowId = windowInfo.id;
@@ -13,50 +13,85 @@ function initialize() {
   // get notes from storage and update text box
   let storedNotes = localStorage.getItem("scratchPadText") || [];
   contentBox.value = storedNotes;
+  //     const notes = storedNotes.slice(storedNotes.indexOf("\n"));
 
   let container = document.getElementById("content");
 
   let emailField = document.createElement("input");
+  let saveButton = document.createElement("button");
+  let toolBar = document.createElement("div");
+
+  container.before(toolBar);
+  toolBar.id = "toolBar";
+
+  toolBar.appendChild(emailField);
+  toolBar.appendChild(saveButton);
+
+  saveButton.type = "submit";
+  saveButton.className = "sendButton";
+  saveButton.textContent = ">";
+  // toolBar.className = "toolBar";
+  //toolBar.appendChild(emailField);
   // emailField.required = true;
   // emailField.setAttribute("required", "");
   emailField.contentEditable = false;
-  //emailField.required = true;
-  emailField.style.width = "230px";
+  //emailField.setAttribute("required", true);
+
+  // emailField.style.width = "230px";
   emailField.type = "email";
   emailField.id = "email";
   let storedEmail = localStorage.getItem("email");
 
   if (!storedEmail) {
-    emailField.placeholder = "enter an email or clickup board!";
+    emailField.placeholder = "enter your email...";
     // alert("Please fill out the input field!");
   } else if (storedEmail) {
     emailField.value = storedEmail;
   }
 
-  let saveButton = document.createElement("button");
-  saveButton.type = "submit";
-  saveButton.className = "sendButton";
-  saveButton.style.width = "100px";
-  saveButton.textContent = "Send";
-  container.before(emailField);
-  container.before(saveButton);
+  //container.before(emailField);
+  //container.before(saveButton);
   saveButton.addEventListener("click", function () {
     let email = emailField.value;
     localStorage.setItem("email", email);
+
+    // Assuming storedNotes is defined and has content
     const subject = storedNotes.slice(0, storedNotes.indexOf("\n"));
-    const notes = storedNotes.slice(storedNotes.indexOf("\n"))
-    // create a new tab and send an email with the text
-    /*  browser.tabs.create({
+    const notes = storedNotes.slice(storedNotes.indexOf("\n"));
+
+    let txt = document.getElementById("content").value;
+    let text = txt.split("\n");
+
+    // Create a single string for the email body with proper line breaks
+    let body = text.splice(1).join("%0D%0A");
+
+    // Open the mail client with the formatted body
+    browser.tabs.create({
+      url: `mailto:${email}?subject=${subject}&body=${body}`,
+    });
+  });
+
+
+  //let str = text.join("\r\n");
+  //console.log("str",text);
+  //str = document.write(str);
+
+  //console.log("note:", parsedNotes);
+  //const e = parsedNotes.replace(/(\r\n|\r|\n)/g, "\\n");
+  //parsedNotes.value = e
+  //console.log("note:", e);
+
+  // console.log("note:", notes);
+  //notes = notes.textContent.split(/\n/);
+  // create a new tab and send an email with the text
+  /*  browser.tabs.create({
       url: "https://app.clickup.com/login",
     }); */
-        browser.tabs.create({
-          url: `mailto:${email}?subject=${subject}&body=${notes}`,
-        });
-  });
+
   // Make the content box editable as soon as the user mouses over the sidebar.
   const mail = document.getElementById("email");
   mail.addEventListener("mouseover", () => {
-    emailField.style.width = "250px";
+    // emailField.style.width = "250px";
 
     console.log("mail");
     emailField.setAttribute("contenteditable", true);
@@ -64,7 +99,7 @@ function initialize() {
   //When the user mouses out, save the current contents of the box.
   mail.addEventListener("mouseout", () => {
     emailField.setAttribute("contenteditable", false);
-    emailField.style.width = "230px";
+    // emailField.style.width = "230px";
 
     let email = document.getElementById("email").value;
     // Save the current contents of the box to local storage.
@@ -171,9 +206,9 @@ function addTabToUI(tab) {
   const imgLink = document.createElement("a");
   const img = document.createElement("img");
 
-  ul.appendChild(li);
+  ul.prepend(li);
   li.className = "tab";
-
+  //li.setAttribute("draggable", true);
   li.appendChild(imgLink);
   imgLink.appendChild(img);
 
@@ -185,9 +220,15 @@ function addTabToUI(tab) {
   titleSpan.href = tab.url;
   titleSpan.textContent = tab.title;
 
+  //     const notes = storedNotes.slice(storedNotes.indexOf("\n"));
+
   hostnameSpan.className = "url";
   hostnameSpan.href = tab.url;
-  hostnameSpan.textContent = tab.url;
+  // set host name title
+  //hostnameSpan.textContent = tab.url;
+  hostnameSpan.textContent = new URL(tab.url).hostname;
+  // hostnameSpan.textContent = tab.url;
+  //console.log(hostnameSpan.hostname);
 
   imgLink.href = tab.url;
 
@@ -223,3 +264,5 @@ resetBtn.addEventListener("click", function () {
     li[0].remove();
   }
 });
+
+// drag and drop functionality

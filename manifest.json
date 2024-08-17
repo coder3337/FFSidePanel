@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Sidebar Tabs 'Reading' Panel",
-  "description": "Show a sidebar of 'current reading' tabs. ",
+  "name": "Sidepanel Notes & Bookmarks - Coder3337_",
+  "description": "Keep your sessions important tabs, save notes and mail them to where you need.",
   "version": "1.0",
   "icons": {
     "48": "icons/star-48.png"
@@ -9,16 +9,16 @@
   "browser_specific_settings": {
     "gecko": {
       "strict_min_version": "58.0",
-      "update_url": "https://github.com/coder3337/FFSidePanel/blob/master/sidepanel.zip",
-      "id": "bd494a8103cc346252e944bc43efc4ec59cc4afe@temporary-addon"
+      "update_url": "https://github.com/coder3337/FFSidePanel/blob/master/sidepanel.zip"
     }
   },
   "sidebar_action": {
     "default_icon": {
       "32": "icons/star-32.png"
     },
-    "default_title": "Sidebar Tabs 'Reading' Panel",
-    "default_panel": "sidebar/panel.html"
+    "default_title": "Sidepanel Notes & Bookmarks - Coder3337_",
+    "default_panel": "sidebar/panel.html",
+    "open_at_install": true
   },
   "permissions": [
     "<all_urls>",
