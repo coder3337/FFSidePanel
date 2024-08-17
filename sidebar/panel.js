@@ -71,7 +71,6 @@ function initialize() {
     });
   });
 
-
   //let str = text.join("\r\n");
   //console.log("str",text);
   //str = document.write(str);
@@ -233,7 +232,8 @@ function addTabToUI(tab) {
   imgLink.href = tab.url;
 
   img.className = "tabIcon";
-  img.src = tab.favIconUrl;
+ // img.src = tab.favIconUrl;
+  img.src = tab.favIconUrl ? tab.favIconUrl : "/icons/star-32.png";
 
   closeBtn.className = "close";
   closeBtn.textContent = "x";
