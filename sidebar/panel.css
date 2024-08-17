@@ -192,7 +192,7 @@ a.url:hover {
   padding: 6px;
   background-color: #09222e;
   border-radius: 5px;
-  float: left;
+  float: inline-start;
 }
 
 .tabIcon {
@@ -242,7 +242,7 @@ div.buttons {
   position: absolute;
   top: 0;
   opacity: 1 !important;
-  right: 0;
+  right: -70px;
   height: 42px;
 }
 
