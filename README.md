@@ -1,4 +1,4 @@
-# A reading panel with scratchpad
+# StashItSendIt Sidebar
 
 ### What it does
 

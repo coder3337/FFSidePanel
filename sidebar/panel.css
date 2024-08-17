@@ -23,6 +23,11 @@ p {
   margin: 1em 2em;
 }
 
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 textarea {
   vertical-align: top;
 }
@@ -37,14 +42,16 @@ textarea {
 }
 
 #toolBar {
-  width: 170px;
-  float: inline-end;
+  /*! width: 170px; */
+  float: right;
   height: 60px;
+  position: relative;
 }
 
 textarea#content,
 input#email {
-  width: 170px;
+  /*! width: 240px; */
+  /*! max-width: 500px; */
 }
 
 #content {
@@ -130,28 +137,34 @@ input:hover+button.sendButton {
 }
 
 a.title {
-  font-size: 14px !important;
+  font-size: 11px !important;
   font-weight: bold;
-  margin-left: 10px;
+}
+
+.title::after {
+  /*   content: "....";
+ */
 }
 
 a.title {
   color: #5bf00577;
   text-decoration: none;
+  float: inline-start;
+  max-width: 350px;
+  overflow: hidden;
 }
 
 a.title:hover {
   color: #5bf005;
 }
 
-a.url {
-  margin-left: 10px;
-  float: left;
-}
+a.url {}
 
 a.url {
   color: #a0a0a0;
   text-decoration: none;
+  font-size: 11px;
+  float: right;
 }
 
 a.url:hover {
@@ -160,10 +173,10 @@ a.url:hover {
 
 .close {
   float: right;
-  padding: 5px 10px;
+  padding: 2px 5px;
   background: #00270263;
   border-radius: 5px;
-  font-size: 14px !important;
+  font-size: 10px !important;
   font-weight: bold;
   color: #5bf005;
 }
@@ -176,14 +189,14 @@ a.url:hover {
 }
 
 .tabIcon {
-  padding: 5px;
+  padding: 6px;
   background-color: #09222e;
   border-radius: 5px;
   float: left;
 }
 
 .tabIcon {
-  width: 30px;
+  width: 24px;
 }
 
 div.buttons {
@@ -226,8 +239,8 @@ div.buttons {
 .sendButton {
   width: auto;
   float: right;
-  position: relative;
-  top: -42px;
+  position: absolute;
+  top: 0;
   opacity: 1 !important;
   right: 0;
   height: 42px;
@@ -246,15 +259,18 @@ ul.tabsList {
   list-style-type: none;
   margin: 0px 0 0 0;
   padding: 0;
+  overflow: hidden;
+  clear: right;
 }
 
 ul.tabsList li {
   font-size: 14px;
   border-radius: 0px;
-  margin: 20px 10px 10px 10px;
+  margin: 10px 0px 0px 0px;
   padding: 0 0 10px 0;
   border-bottom: solid #cccccc2c 1px;
   float: left;
+  width: 100%;
 }
 
 .newEntry {}

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Sidepanel Notes & Bookmarks - Coder3337_",
-  "description": "Keep your sessions important tabs, save notes and mail them to where you need.",
+  "name": "StashItSendIt Sidebar",
+  "description": "Browser side panel to keep your sessions important tabs, save notes and mail them to where you need.",
   "version": "1.0",
   "icons": {
     "48": "icons/star-48.png"
@@ -16,7 +16,7 @@
     "default_icon": {
       "32": "icons/star-32.png"
     },
-    "default_title": "Sidepanel Notes & Bookmarks - Coder3337_",
+    "default_title": "StashItSendIt FF Sidebar",
     "default_panel": "sidebar/panel.html",
     "open_at_install": true
   },
