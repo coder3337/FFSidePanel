@@ -2,14 +2,14 @@
   "manifest_version": 2,
   "name": "StashItSendIt Sidebar",
   "description": "Browser side panel to keep your sessions important tabs, save notes and mail them to where you need.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icons": {
     "48": "icons/star-48.png"
   },
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "58.0",
-      "update_url": "https://github.com/coder3337/FFSidePanel/blob/master/sidepanel.zip"
+      "strict_min_version": "62.0",
+      "update_url": "https://github.com/coder3337/FFSidePanel/blob/master/update.zip"
     }
   },
   "sidebar_action": {

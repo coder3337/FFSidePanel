@@ -4,8 +4,6 @@
 
 A simple reading pane to save tabs you want to come back to. Saves to local storage and has a scratchpad. 
 
-My spin on the *annotate-page* and *quicknote* examples from webextensions-examples. 
-
 ### Environment
 
 In order to debug extensions you must make use of the built in 'Developer tools toolbox' found in about:debugging#/runtime/this-firefox. Load your temporary extensions manifest and click inspect. You will need the web-ext extension.

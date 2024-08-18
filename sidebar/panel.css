@@ -13,7 +13,7 @@ body {
   font: caption;
   background-color: #09181fec;
 }
-
+input, textarea {outline: none;}
 a:hover,
 a:focus {
   cursor: pointer;
@@ -32,20 +32,30 @@ textarea {
   vertical-align: top;
 }
 
+a.imgLink {
+  float: left;
+  margin-right: 5px;
+  position: relative;
+}
+
 .container {
   background-color: #0e3547be;
   border-radius: 20px;
   border: solid #0e3547 1px;
   margin: 10px;
-  min-height: 100%;
-  padding: 20px 5%;
+  /*! min-height: 100%; */
+  padding: 20px 2%;
+  overflow: auto;
+  /*! min-width: 200px; */
 }
 
 #toolBar {
-  /*! width: 170px; */
+  width: 100%;
   float: right;
   height: 60px;
   position: relative;
+  /*! right: 10px; */
+  max-width: 300px;
 }
 
 textarea#content,
@@ -59,12 +69,10 @@ input#email {
   height: 20%;
   margin: 0px 0 0 0;
   padding: 10px;
-  border: .5em solid #0e3547;
-  border-radius: 20px;
+  border-radius: 10px;
   transition: background-color .2s ease-out;
   font-family: monospace !important;
   font-size: 14px;
-
   /*! display: block; */
   clear: both;
   float: right;
@@ -73,21 +81,20 @@ input#email {
 
 #content[contenteditable=false] {
   background-color: #09222e;
-  color: white;
-
+  color: rgb(209, 209, 209);
+  border: 0.5px solid #3da800;
+  /* transition: all 0s ease-in;
+ */
 }
 
 #content[contenteditable=true] {
   background-color: #09222e83;
-  transition: background-color .2s ease-in;
-  color: white;
+  transition: all 0.5s ease;
+  border: 0.5px solid #a80046;
+  color: rgb(255, 255, 255);
 }
 
-#content[contenteditable]:focus {
-  outline: 0px solid transparent;
-  background-color: #09222e;
 
-}
 
 div.error {
   color: red;
@@ -116,7 +123,8 @@ a.sendToLink {
 
 input {
   border-radius: 10px;
-  padding: 10px
+  padding: 10px;
+  width: 100%;
 }
 
 input:invalid {
@@ -139,19 +147,24 @@ input:hover+button.sendButton {
 a.title {
   font-size: 11px !important;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title::after {
-  /*   content: "....";
- */
+  /*     content: "...."; */
 }
 
 a.title {
   color: #5bf00577;
   text-decoration: none;
-  float: inline-start;
   max-width: 350px;
   overflow: hidden;
+  display: block;
+  min-width: 80px;
+  text-wrap: nowrap;
+  width: 75%;
 }
 
 a.title:hover {
@@ -164,35 +177,55 @@ a.url {
   color: #a0a0a0;
   text-decoration: none;
   font-size: 11px;
-  float: right;
 }
 
 a.url:hover {
   color: #ccc;
 }
 
+.hide {
+  display: none;
+}
+
+li.tab:hover .hide:hover {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+li.tab:hover .hide {
+  display: block;
+  opacity: 0.5;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .close {
-  float: right;
-  padding: 2px 5px;
+  padding: 6px 20px;
   background: #00270263;
   border-radius: 5px;
   font-size: 10px !important;
   font-weight: bold;
-  color: #5bf005;
+  text-shadow: none;
 }
+
+li.tab:hover .tabIcon {
+  background-color: #00000063;
+}
+
+.tab li:hover {}
 
 .close:hover {
   cursor: pointer;
-  display: inline-block;
-  background: #002702;
+  display: block;
   color: #ffffff;
 }
 
 .tabIcon {
   padding: 6px;
-  background-color: #09222e;
+  background-color: #00000021;
   border-radius: 5px;
-  float: inline-start;
 }
 
 .tabIcon {
@@ -200,9 +233,18 @@ a.url:hover {
 }
 
 div.buttons {
+  margin-bottom: 10px;
   position: relative;
   bottom: 0px;
-  left: 10px;
+  margin-left: 10px;
+  float: right;
+}
+
+.resetButton {
+  clear: both;
+  display: block;
+  text-align: center;
+  color: #cccccc5e;
 }
 
 #addTabButton {
@@ -211,7 +253,7 @@ div.buttons {
   font-weight: bold;
   border-radius: 10px;
   padding: 10px;
-  margin-right: 20px;
+  /*! margin-right: 20px; */
   font-size: 14px;
   width: 100px;
   text-align: center;
@@ -242,7 +284,7 @@ div.buttons {
   position: absolute;
   top: 0;
   opacity: 1 !important;
-  right: -70px;
+  right: 0;
   height: 42px;
 }
 
@@ -257,20 +299,21 @@ a.resetLink {}
 
 ul.tabsList {
   list-style-type: none;
-  margin: 0px 0 0 0;
+  margin: 0px 5%;
   padding: 0;
-  overflow: hidden;
   clear: right;
+  /*! height: auto; */
 }
 
 ul.tabsList li {
   font-size: 14px;
   border-radius: 0px;
   margin: 10px 0px 0px 0px;
-  padding: 0 0 10px 0;
+  padding: 0 0 5px 0;
   border-bottom: solid #cccccc2c 1px;
   float: left;
   width: 100%;
+  position: relative;
 }
 
 .newEntry {}

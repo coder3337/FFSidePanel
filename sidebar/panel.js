@@ -1,6 +1,7 @@
 let myWindowId;
 const contentBox = document.getElementById("content");
-contentBox.placeholder = "Subject goes here...\n\nBody content here...";
+contentBox.placeholder =
+  "This would be a subject line...\n\nAnd this your body. Send this scratchpad, handy for notes to yourself or creating quick clickup tasks, try emailing your board. Drag tabs here to send a link...";
 
 browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
   myWindowId = windowInfo.id;
@@ -92,7 +93,7 @@ function initialize() {
   mail.addEventListener("mouseover", () => {
     // emailField.style.width = "250px";
 
-    console.log("mail");
+    //console.log("mail");
     emailField.setAttribute("contenteditable", true);
   });
   //When the user mouses out, save the current contents of the box.
@@ -116,13 +117,14 @@ function initialize() {
   } else {
     console.log("checked for existing items...nothing");
   }
+  const txtHoverArea = document.getElementById("content");
 
   // Make the content box editable as soon as the user mouses over the sidebar.
-  window.addEventListener("mouseover", () => {
+  txtHoverArea.addEventListener("mouseover", () => {
     contentBox.setAttribute("contenteditable", true);
   });
   //When the user mouses out, save the current contents of the box.
-  window.addEventListener("mouseout", () => {
+  txtHoverArea.addEventListener("mouseout", () => {
     contentBox.setAttribute("contenteditable", false);
     let scratchPadText = document.getElementById("content").value;
     // Save the current contents of the box to local storage.
@@ -143,7 +145,7 @@ btn.addEventListener("click", function () {
 
 // add new items to storage
 function saveItems(tabs) {
-  console.log("tabsq", tabs);
+  //console.log("tabsq", tabs);
 
   // Check if tabs are valid
   if (tabs.length === 0) return;
@@ -158,12 +160,14 @@ function saveItems(tabs) {
   let existingTabs = JSON.parse(localStorage.getItem("Tab")) || [];
   // Check if the tab already exists in localStorage
   const tabExists = existingTabs.some((tab) => tab.id === id);
-  let container = document.getElementById("content");
+  let container = document.getElementById("sortable");
   if (tabExists) {
     /*     emailErrorMsg.style.visibility = "hidden";
      */ //emailErrorMsg.removeChild(emailErrorMsg);
     let emailErrorMsg = document.createElement("div");
     emailErrorMsg.classList = "error";
+    emailErrorMsg.prepend("sortable");
+    container.prepend(emailErrorMsg);
     setTimeout(() => {
       const el = document.querySelector(".error");
       el.remove();
@@ -171,7 +175,6 @@ function saveItems(tabs) {
 
     emailErrorMsg.innerHTML = "<p>This tab is already in your list!</p>";
 
-    container.before(emailErrorMsg);
     //console.log("Tab already exists, not adding duplicate.");
     return;
   }
@@ -210,14 +213,15 @@ function addTabToUI(tab) {
   //li.setAttribute("draggable", true);
   li.appendChild(imgLink);
   imgLink.appendChild(img);
-  li.appendChild(closeBtn);
+  imgLink.className = "imgLink";
   li.appendChild(titleSpan);
   li.appendChild(hostnameSpan);
-
-
   titleSpan.className = "title";
   titleSpan.href = tab.url;
   titleSpan.textContent = tab.title;
+  li.appendChild(closeBtn);
+  closeBtn.className = "close hide";
+  closeBtn.textContent = "x";
 
   //     const notes = storedNotes.slice(storedNotes.indexOf("\n"));
 
@@ -232,11 +236,8 @@ function addTabToUI(tab) {
   imgLink.href = tab.url;
 
   img.className = "tabIcon";
- // img.src = tab.favIconUrl;
+  // img.src = tab.favIconUrl;
   img.src = tab.favIconUrl ? tab.favIconUrl : "/icons/star-32.png";
-
-  closeBtn.className = "close";
-  closeBtn.textContent = "x";
 
   closeBtn.addEventListener("click", function () {
     this.parentNode.remove(); // This will remove the li element
@@ -253,16 +254,24 @@ function removeTabFromStorage(id) {
 // remove all bookmark items from sidebar
 const resetBtn = document.querySelector(".resetButton");
 resetBtn.addEventListener("click", function () {
-  // clear the local storage
-  localStorage.clear();
-  document.getElementById("content").value = "";
+  if (
+    confirm("Are you sure? This will remove your saved tabs and scratch pad")
+  ) {
+    // Save it!
+    console.log("Local storage cleared");
+    localStorage.clear();
+    document.getElementById("content").value = "";
+    const li = document.getElementsByClassName("tab");
+    //console.log(li);
 
-  const li = document.getElementsByClassName("tab");
-  //console.log(li);
-
-  while (li.length != 0) {
-    li[0].remove();
+    while (li.length != 0) {
+      li[0].remove();
+    }
+  } else {
+    // Do nothing!
+    console.log("Not cleared, your tabs are safe.");
   }
+  // clear the local storage
 });
 
 // drag and drop functionality
