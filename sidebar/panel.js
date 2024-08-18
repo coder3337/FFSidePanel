@@ -210,7 +210,7 @@ function addTabToUI(tab) {
 
   ul.prepend(li);
   li.className = "tab";
-  //li.setAttribute("draggable", true);
+  li.setAttribute("draggable", true);
   li.appendChild(imgLink);
   imgLink.appendChild(img);
   imgLink.className = "imgLink";

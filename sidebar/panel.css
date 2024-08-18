@@ -1,19 +1,25 @@
 html,
 body {
-  height: 100%;
-  width: 100%;
+  /*! height: 100%; */
+  /*! width: 100%; */
   margin: 0;
-  box-sizing: border-box;
-  color: rgb(209, 209, 209);
-  font-size: 14px !important;
+  /*! box-sizing: border-box; */
+  /*! color: rgb(209, 209, 209); */
+  /*! font-size: 14px !important; */
+  padding: 0;
 }
 
 body {
-  height: 90%;
+  /*! height: 100%; */
   font: caption;
   background-color: #09181fec;
 }
-input, textarea {outline: none;}
+
+input,
+textarea {
+  outline: none;
+}
+
 a:hover,
 a:focus {
   cursor: pointer;
@@ -42,11 +48,16 @@ a.imgLink {
   background-color: #0e3547be;
   border-radius: 20px;
   border: solid #0e3547 1px;
-  margin: 10px;
-  /*! min-height: 100%; */
+  margin: 5% auto;
+  /*! min-height: 50%; */
   padding: 20px 2%;
   overflow: auto;
   /*! min-width: 200px; */
+  min-height: 100%;
+  height: 100%;
+  /*! margin-bottom: 0px; */
+  width: 90%;
+  /*! display: block; */
 }
 
 #toolBar {
@@ -186,7 +197,22 @@ a.url:hover {
 .hide {
   display: none;
 }
-
+li.tab.dragElem {opacity: 0.8;}
+li.tab {
+  cursor: grab;
+}
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+.over {opacity: 0.5;
+  border: 2px dashed #9e9e9e !important;
+}
 li.tab:hover .hide:hover {
   opacity: 1;
   transition: all 0.2s ease-in-out;
@@ -314,6 +340,7 @@ ul.tabsList li {
   float: left;
   width: 100%;
   position: relative;
+  cursor: move;
 }
 
 .newEntry {}
