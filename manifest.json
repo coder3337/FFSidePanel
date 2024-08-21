@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "StashItSendIt Sidebar",
   "description": "Browser side panel to keep your sessions important tabs, save notes and mail them to where you need.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icons": {
     "48": "icons/star-48.png"
   },

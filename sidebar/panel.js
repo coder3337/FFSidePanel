@@ -19,19 +19,21 @@ function initialize() {
   let container = document.getElementById("content");
 
   let emailField = document.createElement("input");
+  //let emailThisButton = document.createElement("button");
   let saveButton = document.createElement("button");
   let toolBar = document.createElement("div");
 
   container.before(toolBar);
   toolBar.id = "toolBar";
 
+  //toolBar.appendChild(emailThisButton);
+  //toolBar.className = "hide";
   toolBar.appendChild(emailField);
   toolBar.appendChild(saveButton);
 
   saveButton.type = "submit";
   saveButton.className = "sendButton";
   saveButton.textContent = ">";
-  // toolBar.className = "toolBar";
   //toolBar.appendChild(emailField);
   // emailField.required = true;
   // emailField.setAttribute("required", "");
@@ -70,7 +72,13 @@ function initialize() {
     browser.tabs.create({
       url: `mailto:${email}?subject=${subject}&body=${body}`,
     });
+    
+    console.log("click");
+    clickSend();
   });
+
+  //console.log("ran");
+  //sendMailButton.className = "hide";
 
   //let str = text.join("\r\n");
   //console.log("str",text);
@@ -131,6 +139,26 @@ function initialize() {
     localStorage.setItem("scratchPadText", scratchPadText);
   });
 }
+var x = document.getElementById("toolBar");
+x.style.opacity = "0";
+x.style.height = "0px";
+
+
+// add condition to not send if no email found
+let e = document.getElementById("emailThisButton");
+e.addEventListener("click", function () {
+  var x = document.getElementById("toolBar");
+
+  if (x.style.height === "0px") {
+    x.style.height = "60px";
+    x.style.transition = "height 0.5s ease-in-out, opacity 1s ease-in-out, transform 2s";
+    x.style.opacity = "1";
+  } else {
+    x.style.height = "0px";
+    x.style.opacity = "0";
+    x.style.transition = "opacity 0.1s ease-in-out";
+  }
+});
 
 btn = document.querySelector("#addTabButton");
 //console.log("btn", btn);
@@ -157,7 +185,7 @@ function saveItems(tabs) {
   let favIconUrl = tabs[0].favIconUrl;
 
   // Retrieve the existing array from localStorage, or initialize it as an empty array if it doesn't exist
-  let existingTabs = JSON.parse(localStorage.getItem("Tab")) || [];
+  let existingTabs = JSON.parse(localStorage.getItem("Tab")) || []; 
   // Check if the tab already exists in localStorage
   const tabExists = existingTabs.some((tab) => tab.id === id);
   let container = document.getElementById("sortable");
@@ -173,7 +201,7 @@ function saveItems(tabs) {
       el.remove();
     }, "500");
 
-    emailErrorMsg.innerHTML = "<p>This tab is already in your list!</p>";
+    emailErrorMsg.innerHTML = "<p>Already in your list!</p>";
 
     //console.log("Tab already exists, not adding duplicate.");
     return;

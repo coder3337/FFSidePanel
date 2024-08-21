@@ -7,6 +7,7 @@ body {
   /*! color: rgb(209, 209, 209); */
   /*! font-size: 14px !important; */
   padding: 0;
+  height: 100%;
 }
 
 body {
@@ -53,21 +54,64 @@ a.imgLink {
   padding: 20px 2%;
   overflow: auto;
   /*! min-width: 200px; */
-  min-height: 100%;
+  /*! min-height: 100%; */
   height: 100%;
   /*! margin-bottom: 0px; */
   width: 90%;
   /*! display: block; */
 }
 
+.gutter {
+  /*! height: 100%; */
+}
+
 #toolBar {
   width: 100%;
   float: right;
-  height: 60px;
   position: relative;
   /*! right: 10px; */
   max-width: 300px;
 }
+
+/* 
+// use this animation stuff
+.header-area .main-nav img {
+  animation-name: logoAnimation;
+  animation-duration: 4s;
+  animation-delay: 6s;
+}
+
+@keyframes logoAnimation {
+  0% {
+    transform: rotate(0deg);
+    left: 0px;
+  }
+
+  25% {
+    transform: rotate(20deg);
+    left: 0px;
+  }
+
+  50% {
+    transform: rotate(0deg);
+    left: 500px;
+  }
+
+  55% {
+    transform: rotate(0deg);
+    left: 500px;
+  }
+
+  70% {
+    transform: rotate(0deg);
+    left: 500px;
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    left: 0px;
+  }
+} */
 
 textarea#content,
 input#email {
@@ -196,11 +240,18 @@ a.url:hover {
 
 .hide {
   display: none;
+  transition: visibility 0s 2s, opacity 2s linear;
 }
-li.tab.dragElem {opacity: 0.8;}
+
+li.tab.dragElem {
+  opacity: 0.8;
+}
+
 li.tab {
   cursor: grab;
+  text-shadow: 1px 1px #3d3d3d;
 }
+
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -210,9 +261,12 @@ li.tab {
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
-.over {opacity: 0.5;
+
+.over {
+  opacity: 0.5;
   border: 2px dashed #9e9e9e !important;
 }
+
 li.tab:hover .hide:hover {
   opacity: 1;
   transition: all 0.2s ease-in-out;
@@ -228,7 +282,7 @@ li.tab:hover .hide {
 }
 
 .close {
-  padding: 6px 20px;
+  padding: 4px 6px;
   background: #00270263;
   border-radius: 5px;
   font-size: 10px !important;
@@ -273,14 +327,31 @@ div.buttons {
   color: #cccccc5e;
 }
 
+#emailThisButton {
+  background-color: #5bf00577;
+  color: #ccc;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+  /*! font-size: 10px; */
+  /*! width: 60px; */
+  text-align: center;
+  border: solid #ccc 0px;
+  float: left;
+  transition: background-color .2s ease-out;
+  text-shadow: 1px 1px #3d3d3d;
+}
+
 #addTabButton {
+  text-shadow: 1px 1px #3d3d3d;
   background-color: #5bf00577;
   color: #ccc;
   font-weight: bold;
   border-radius: 10px;
   padding: 10px;
   /*! margin-right: 20px; */
-  font-size: 14px;
+  font-size: 13px;
   width: 100px;
   text-align: center;
   border: solid #ccc 0px;
@@ -315,7 +386,8 @@ div.buttons {
 }
 
 #addTabButton:hover,
-.sendButton:hover {
+.sendButton:hover,
+#emailThisButton:hover {
   cursor: pointer;
   background-color: chartreuse;
   color: black;
